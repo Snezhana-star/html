@@ -26,13 +26,40 @@ require 'views/connect.php';
 </style>
 <body>
     <a href="index.php"><h2>Вернуться на главную</h2></a>
-    <form action="vendor/createuser.php" method="post">
-        <p>ФИО</p>
-        <input type="text" name="name">
-        <p>Номер телефона</p>
-        <input type="tel" name="tel"><br><br>
+    <form action="vendor/createflat.php" method="post">
+        <p>Номер квартиры</p>
+        <input type="tel" name="tel">
+        <p>Адресс</p>
+        <input type="text" name="address">
+        <p>Номер владельца</p>
+        <input type="numder" name="user_id">
+        <br><br>
         <button type="submit">Добавить</button>
     </form><br>
+    <table>
+        <tr>
+            <th>№ квартиры</th>
+            <th>Номер квартиры</th>
+            <th>Адресс</th>
+            <th>Номер владельца</th>
+            <th>Кол-во выездов экипажей</th>
+        </tr>
+        <?php
+        $flats = mysqli_query($connect, "SELECT * FROM `Flat`");
+        $flats = mysqli_fetch_all($flats);
+        foreach ($flats as $flat){
+        ?>
+        <tr>
+            <td><?=  $flat[0]?></td>
+            <td><?=  $flat[1]?></td>
+            <td><?=  $flat[2]?></td>
+            <td><?=  $flat[3]?></td>
+            <td><?=  $flat[4]?></td>
+        </tr>
+        <?php
+        }
+    ?>
+    </table>
     <table>
         <tr>
             <th>Номер Владельца</th>

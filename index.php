@@ -1,5 +1,5 @@
 <?php
-require 'views/connect.php'
+require 'views/connect.php';
 ?>
 
 
@@ -28,8 +28,8 @@ require 'views/connect.php'
     <table>
         <tr>
             <th>Номер контракта</th>
-            <th>Владелец</th>
-            <th>Квартира</th>
+            <th>№ Владелеца</th>
+            <th>№ Квартиры</th>
             <th>Дата подписания</th>
             <th>Дата завершения</th>
             <th>Статус</th>
@@ -49,12 +49,25 @@ require 'views/connect.php'
                         <td><?=  $contract[5]?></td>
                         <td><?=  $contract[6]?></td>
                         <td><a href="?user_id=<?=  $contract[1]?>&flat_id=<?=  $contract[2]?>">Данные</td>
+                        <?php
+                        if ($contract[6]==="on"){?>
+                            <td><a href="vendor/sos.php?flat_id_sos=<?=  $contract[2]?>">Отправить экипаж</td>
+                            <?php
+                        }
+                        ?>
+                        <?php
+                        if ($contract[4] < date('Y-m-d')){?>
+                            <td><a style="color: red;"href="vendor/delete.php?contract_id=<?=  $contract[0]?>">Удалить контракт</td>
+                        <?php   
+                        }
+                        ?>
                     </tr>
             <?php
         }
     ?>
-       
+    
     </table>
+    <h2><a href="createcontract.php">Добавить новый контракт + </h2> </a>
     <h2>Данные о владельце и квартире</h2>
     <table>
         <tr>
@@ -83,7 +96,9 @@ require 'views/connect.php'
             <td><?=  $flat['SOS_calls']?></td>
         </tr>
     </table>
-    <h2><a href="createuser.php">Добавить нового владельца + </h2>
+    <h2><a href="createuser.php">Добавить нового владельца + </h2></a>
+    <h2><a href="createflat.php">Добавить новую квартиру + </h2></a>
+
     
 </body>
 </html>
